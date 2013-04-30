@@ -1,4 +1,4 @@
 # Cocktailizr
 
-[*Cocktailizr*](http://not yet defined/)
+[*Cocktailizr*](http://safe-plains-5378.herokuapp.com/ingredients/new)
 by [Aurélien Gabet]
