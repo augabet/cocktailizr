@@ -1,0 +1,16 @@
+<% provide(:title, 'Nouvel ingredient') %>
+<h1>Nouvel ingrédient</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@ingredient) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+	
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Ajouter cet ingrédient", class: "btn btn-large btn-primary" %>
+    <% end %>
+ 	</div>
+</div>

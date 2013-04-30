@@ -1,4 +1,12 @@
 Cocktailizr::Application.routes.draw do
+
+  root to: 'ingredients#show'
+  resources :ingredients
+  get "ingredients/new"
+  get "ingredients/create"
+  get "ingredients/update"
+  get "ingredients/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
