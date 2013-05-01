@@ -1,0 +1,12 @@
+<% provide(:title, 'Ingrédients') %>
+<h1>Ingrédients existants</h1>
+
+<p>
+
+  <% @ingredients.each do |i|  %>
+  <b>Nom: </b><%= i.name %> </br>
+  <%end %>
+  </br>
+  <%= link_to "Ajouter un nouvel ingrédient", new_ingredient_path,
+                           class: "btn btn-large btn-primary" %>
+</p>

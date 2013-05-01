@@ -2,7 +2,7 @@ Cocktailizr::Application.routes.draw do
 
   get "static_pages/home"
 
-  root to: 'ingredients#show'
+  root to: 'static_pages#home'
   resources :ingredients
   get "ingredients/new"
   get "ingredients/create"
