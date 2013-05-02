@@ -1,13 +1,18 @@
 Cocktailizr::Application.routes.draw do
 
+
   get "static_pages/home"
 
   root to: 'static_pages#home'
   resources :ingredients
+  resources :cocktails
   get "ingredients/new"
   get "ingredients/create"
   get "ingredients/update"
   get "ingredients/destroy"
+  get "cocktails/new"
+  get "cocktails/create"
+  get "cocktails/show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

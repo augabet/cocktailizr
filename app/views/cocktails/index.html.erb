@@ -1,0 +1,12 @@
+<% provide(:title, 'Cocktails') %>
+<h1>Tous les cocktails</h1>
+
+<p>
+
+  <% @cocktails.each do |i|  %>
+  <b>Nom: </b><%= i.name %> </br>
+  <%end %>
+  </br>
+  <%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
+                           class: "btn btn-large btn-primary" %>
+</p>
