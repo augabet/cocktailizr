@@ -33,6 +33,10 @@ GEM
     arel (3.0.2)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
+    chosen-rails (0.9.13)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -110,6 +114,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bootstrap-sass (= 2.1)
+  chosen-rails
   coffee-rails (= 3.2.2)
   jquery-rails (= 2.0.2)
   pg (= 0.12.2)

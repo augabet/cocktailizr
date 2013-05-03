@@ -11,4 +11,6 @@
 class Ingredient < ActiveRecord::Base
   attr_accessible :name
   validate :name, presence: true
+  has_many :quantities
+  has_many :cocktails, through: :quantities
 end

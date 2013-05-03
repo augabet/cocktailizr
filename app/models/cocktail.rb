@@ -10,8 +10,11 @@
 #
 
 class Cocktail < ActiveRecord::Base
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :ingredient_ids
   validate :name, presence: true
   validate :description, presence: true
+
+  has_many :quantities
+  has_many :ingredients, through: :quantities
 
 end

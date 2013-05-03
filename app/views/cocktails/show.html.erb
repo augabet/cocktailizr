@@ -4,7 +4,13 @@
 <p>
   <b>Nom :</b>
   <%= @cocktail.name %>
-   </br>
+   <br />
     <b>Description :</b>
   <%= @cocktail.description %>
+  <br /> <br />
+
+ 	<b>Ingrédients :</b>
+  <% @cocktail.ingredients.each do |ingredients| %>
+  <li><%= ingredients.name %></li>
+<% end %>
 </p>

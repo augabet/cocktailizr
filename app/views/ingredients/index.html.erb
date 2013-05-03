@@ -1,12 +1,19 @@
-<% provide(:title, 'Ingrédients') %>
-<h1>Ingrédients existants</h1>
+<h1>Listing authors</h1>
 
-<p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-  <% @ingredients.each do |i|  %>
-  <b>Nom: </b><%= i.name %> </br>
-  <%end %>
-  </br>
-  <%= link_to "Ajouter un nouvel ingrédient", new_ingredient_path,
-                           class: "btn btn-large btn-primary" %>
-</p>
+<% @ingredients.each do |author| %>
+  <tr>
+    <td><%= author.name %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
