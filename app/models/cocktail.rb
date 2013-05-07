@@ -17,4 +17,22 @@ class Cocktail < ActiveRecord::Base
   has_many :quantities
   has_many :ingredients, through: :quantities
 
+
+  	include PgSearch
+	pg_search_scope :search, against: [:name, :description],
+	using: {tsearch: {dictionnay: "fr_uk"}},
+	associated_against: {ingredients: :name}
+    
+
+  def self.text_search(query)
+    if query.present?
+      search(query)
+      #rank = <<-RANK
+      #  ts_rank(to_tsvector(name), plainto_tsquery(#{sanitize(query)}))
+      #RANK
+     # where("to_tsvector('english', name) @@ :q or to_tsvector('english', description) @@ :q", q: query).order("#{rank} desc")
+    else
+      scoped
+    end
+  end
 end

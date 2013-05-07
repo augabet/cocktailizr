@@ -1,12 +1,21 @@
 <% provide(:title, 'Cocktails') %>
-<h1>Tous les cocktails</h1>
 
-<p>
+<%= form_tag cocktails_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil, class: "btn btn-large btn-primary"%>
+  </p>
+<% end %>
 
-  <% @cocktails.each do |i|  %>
-  <b>Nom: </b><%= i.name %> </br>
-  <%end %>
-  </br>
+	<h1>Tous les cocktails</h1>
+
+	  <% @cocktails.each do |cocktail|  %>
+ 	 	<h3><%= link_to cocktail.name, cocktail %></h3>
+ 	 		<%cocktail.ingredients.each do |ingredient| %>
+ 	 		<h3><%= ingredient.name %></h3>
+ 	 	<%end %><br />	
+  	  <%end %>
+
+
   <%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
                            class: "btn btn-large btn-primary" %>
-</p>
