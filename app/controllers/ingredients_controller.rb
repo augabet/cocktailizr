@@ -2,7 +2,12 @@ class IngredientsController < ApplicationController
   
   def index
     @ingredients = Ingredient.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @ingredients.tokens(params[:q]) }
+    end 
   end
+
 
   def new
     @ingredient = Ingredient.new

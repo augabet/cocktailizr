@@ -2,4 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-	$('#cocktail_ingredient_ids').chosen()
+  $('#cocktail_ingredient_tokens').tokenInput '/ingredients.json',
+  theme: 'facebook'
+  prePopulate: $('#cocktail_ingredient_tokens').data('load')

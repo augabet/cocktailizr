@@ -10,13 +10,18 @@
 #
 
 class Cocktail < ActiveRecord::Base
-  attr_accessible :description, :name, :ingredient_ids
+  attr_accessible :description, :name, :ingredient_tokens
+  attr_reader :ingredient_tokens
+
   validate :name, presence: true
   validate :description, presence: true
 
   has_many :quantities
   has_many :ingredients, through: :quantities
 
+  def ingredient_tokens=(tokens)  
+      self.ingredient_ids = Ingredient.ids_from_tokens(tokens)
+  end
 
   	include PgSearch
 	pg_search_scope :search, against: [:name, :description],
