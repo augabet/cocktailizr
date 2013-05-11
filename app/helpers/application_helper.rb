@@ -8,4 +8,21 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+
+
+  def perfect_match(query, cocktail)
+    if query != nil
+      tabquery = query.split(" ").map { |i| i.to_s} 
+      tabingredient = Array.new 
+      cocktail.ingredients.each do |ingredient|
+        tabingredient.push(ingredient.name) 
+      end 
+      resultat =   tabingredient - tabquery
+    else 
+      resultat = "ingredient"
+    end
+  end
+
+
+  
 end

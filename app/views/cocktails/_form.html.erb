@@ -1,20 +1,30 @@
 <%= form_for(@cocktail) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
+<div class="row-fluid">
+	<div class="span6">
 
-	<div class="field">
-	      <%= f.text_field :name, placeholder: "Nom du cocktail..." %>
+		<div class="field">
+				<%= f.text_field :name, placeholder: "Nom du cocktail..." %>
+		</div>
+
+
+		<div class="field">
+		  <%= f.label :ingredient_tokens, "Ingredients" %>
+		  <%= f.text_field :ingredient_tokens,  placeholder: "Ingrédients...", data: {load: @cocktail.ingredients}%>
+		</div><br />
+
 	</div>
 
+	<div class="span6">
+		<div class="field">
+			 <%= f.text_area :description, placeholder: "Décrivez votre cocktail...", rows: "10" %>
+		</div>
 
-	<div class="field">
-	  <%= f.label :ingredient_tokens, "Ingredients" %>
-	  <%= f.text_field :ingredient_tokens, data: {load: @cocktail.ingredients} %>
-	</div><br />
+	     <%= f.submit "Ajouter ce cocktail", class: "btn" %>
 
-	<div class="field">
-		 <%= f.text_area :description, placeholder: "Décrivez votre cocktail..."%>
 	</div>
-
-      <%= f.submit "Ajouter ce cocktail", class: "btn btn-large btn-primary" %>
 <% end %>
+
+
+

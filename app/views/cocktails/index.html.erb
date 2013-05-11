@@ -1,21 +1,68 @@
 <% provide(:title, 'Cocktails') %>
+	
+<div class="page-header">
+  <h1>Tous les cocktails <small> En fonction des ingrédients que vous avez </small></h1>
+</div>
 
-<%= form_tag cocktails_path, method: :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil, class: "btn btn-large btn-primary"%>
-  </p>
-<% end %>
+<div class="row-fluid">
+	<div class="span4">
 
-	<h1>Tous les cocktails</h1>
+		<form class="form-search">
+			<div class="input-append">
+		<%= form_tag cocktails_path,method: :get do %>
 
-	  <% @cocktails.each do |cocktail|  %>
- 	 	<h3><%= link_to cocktail.name, cocktail %></h3>
- 	 		<%cocktail.ingredients.each do |ingredient| %>
- 	 		<h3><%= ingredient.name %></h3>
- 	 	<%end %><br />	
-  	  <%end %>
+		 
+		    <%= text_field_tag :query, params[:query], placeholder: "ex : vodka whisky ...", class:"search-query"%>
+		    <%= submit_tag "Rechercher", name: nil, class:"btn"%>
+
+		<% end %>
+			</div>
+		</form>
+		<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
+		                           class: "btn btn-large" %>
+	</div>
+
+	<div class="span8">
+
+	
+		<ul class="thumbnails">
+			<% @cocktails.each do |cocktail|  %>
+			<% resultat = perfect_match(params[:query], cocktail)%> 
+			  <li class="span4">
+			    
+   			     	 
+				      <% if resultat.empty? %>
+				      	<div class="thumbnail specialthumb">
+				      	  <img src="/images/cock3.jpg" alt="" style="width:300px; height:200px;">
+						  <h3><%= cocktail.name %></h3>
+						 <% ingredient_thumb = Array.new %>     
+					      <%cocktail.ingredients.each do |ingredient| %>
+					      	<% ingredient_thumb.push(ingredient.name) %>
+					      <%end %>
+					      <p><%= ingredient_thumb.first%></p>
+					      <p>...</p>
+					      <p><%= link_to "Description", cocktail,class: "btn " %></p>
+					     </div>
 
 
-  <%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
-                           class: "btn btn-large btn-primary" %>
+					   <% else %>
+					   	  <div class="thumbnail">
+				      	  <img src="/images/cock4.jpg" alt="" style="width:300px; height:200px;">
+							<h3><%= cocktail.name %></h3>
+							<% ingredient_thumb = Array.new %> 
+							<%cocktail.ingredients.each do |ingredient| %>
+					      	<% ingredient_thumb.push(ingredient.name) %>
+					      	<%end %>
+					      		<p><%= ingredient_thumb.first%></p>
+					      		<p>Il manque <%= resultat.length %> ingrédients</p>
+					      	<p><%= link_to "Description", cocktail,class: "btn " %></p>
+					      </div>
+
+						<%end %>
+
+			      
+			  </li>
+		  	<%end %>
+		</ul>
+	</div>
+</div>

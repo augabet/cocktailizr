@@ -13,19 +13,21 @@ class Cocktail < ActiveRecord::Base
   attr_accessible :description, :name, :ingredient_tokens
   attr_reader :ingredient_tokens
 
-  validate :name, presence: true
-  validate :description, presence: true
+  validates :name, presence: true
+  validates :description, presence: true
+
 
   has_many :quantities
   has_many :ingredients, through: :quantities
 
+  
   def ingredient_tokens=(tokens)  
       self.ingredient_ids = Ingredient.ids_from_tokens(tokens)
   end
 
-  	include PgSearch
+  include PgSearch
 	pg_search_scope :search, against: [:name, :description],
-	using: {tsearch: {dictionnay: "fr_uk"}},
+	using: {tsearch: {:any_word => true}},
 	associated_against: {ingredients: :name}
     
 

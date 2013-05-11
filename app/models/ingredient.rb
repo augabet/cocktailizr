@@ -10,9 +10,11 @@
 
 class Ingredient < ActiveRecord::Base
   attr_accessible :name
-  validate :name, presence: true
+  validates :name, presence: true
+  				  # uniqueness: { case_sensitive: false }
   has_many :quantities
   has_many :cocktails, through: :quantities
+  before_save { name.downcase! }
 
 
 	def self.tokens(query)
