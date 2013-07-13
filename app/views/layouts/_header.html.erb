@@ -1,14 +1,44 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
-          <div class="container">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
             <%= link_to "Cocktailizr", root_path, id: "logo" %>
-            <nav>
-              <ul class="nav pull-right">
-                <li><%= link_to "Cocktails", cocktails_path %></li>
-                <li><%= link_to "Ingrédients", ingredients_path %></li>
-                <!--li><%= link_to "Sign in", '#' %></li-->
-              </ul>
-            </nav>
-          </div>
+
+      <div class="nav-collapse collapse">
+        <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to "Cocktails", cocktails_path %></li>
+              <li><%= link_to "Ingrédients", ingredients_path %></li>
+               
+               <% if user_signed_in? %>
+                <li>Bonjour <strong><%= current_user.email  %></strong></li>
+               <% end %>
+
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Mon compte
+                <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <% if user_signed_in? %>
+                    <li><%= link_to 'Profil'.html_safe, edit_user_registration_path %> </li>
+                    <li><%= link_to "Déconnexion".html_safe, destroy_user_session_path, method: :delete %></li>
+                  <% else %>
+                    <li><%= link_to "Créer un compte".html_safe, new_user_registration_path %></li>
+                    <li><%= link_to "Se connecter".html_safe, new_user_session_path %></li>
+                  <% end %>
+
+                </ul>
+                </li>
+            </ul>
+        </nav>
+      </div> 
+    </div>
   </div>
 </header>

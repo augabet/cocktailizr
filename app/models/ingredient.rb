@@ -10,26 +10,9 @@
 
 class Ingredient < ActiveRecord::Base
   attr_accessible :name
-  validates :name, presence: true
-  				  # uniqueness: { case_sensitive: false }
+
+  validates :name, presence: true,uniqueness: { case_sensitive: false }
   has_many :quantities
   has_many :cocktails, through: :quantities
-  before_save { name.downcase! }
-
-
-	def self.tokens(query)
-	  ingredients = where("name like ?", "%#{query}%")
-	  if ingredients.empty?
-	    [{id: "<<<#{query}>>>", name: "New: \"#{query}\""}]
-	  else
-	    ingredients
-	  end
-	end
-
-	def self.ids_from_tokens(tokens)
-	  tokens.gsub!(/<<<(.+?)>>>/) { create!(name: $1).id }
-	  tokens.split(',')
-	end
-
 
 end

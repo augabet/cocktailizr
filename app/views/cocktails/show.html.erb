@@ -6,13 +6,17 @@
   <%= @cocktail.name %>
    <br />
     <b>Description :</b>
-  <%= @cocktail.description %>
+ <%= simple_format(@cocktail.description) %>
   <br /> <br />
 
  	<b>Ingrédients :</b>
   <% @cocktail.ingredients.each do |ingredients| %>
-  <li><%= ingredients.name %></li>
-<% end %>
+    <li><%= ingredients.name %>
+          <% ingredients.quantities.each do |quantities| %>  
+              <%= quantities.dose if quantities.cocktail_id == @cocktail.id%>
+          <% end %>
+    </li>
+  <% end %>
 </p>
 
   <%= link_to "Ajouter un nouveau coktail", new_cocktail_path,

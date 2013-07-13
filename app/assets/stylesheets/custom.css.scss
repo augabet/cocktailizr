@@ -1,7 +1,6 @@
 @import "bootstrap";
-body { padding-top: 60px; 
-
-}
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
 
 /* mixins, variables, etc. */
 
@@ -12,19 +11,10 @@ $grayMediumLight: #eaeaea;
   -webkit-box-sizing: border-box;
   box_sizing: border-box;
 }
-
+  
 /* universal */
 
-.container,
-.navbar-static-top .container,
-.navbar-fixed-top .container,
-.navbar-fixed-bottom .container {
-  width: 1200px;
-}
 
-.row{
-  width: 1200px;
-}
 .thumbnail {
  background-color: #eaeaea;
    margin-left : 0px;

@@ -1,15 +1,85 @@
 <%= form_for(@cocktail) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.text_field :name, placeholder: "Nom du cocktail..." %>
+<div class="row-fluid">
+	<div class="span6">
 
-      <div class="field">
-      	<%= f.label :ingredient_ids, "Ingredients" %><br />
-      	<%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name, {},
-{multiple: true} %>
-      </div><br />
+		<div class="field">
+				<%= f.text_field :name, placeholder: "Nom du cocktail..." %>
+		</div>
 
-      <%= f.text_area :description, placeholder: "Décrivez votre cocktail..."%>
 
-      <%= f.submit "Ajouter ce cocktail", class: "btn btn-large btn-primary" %>
+		<div class="field">
+ 			 <%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name%>
+		 </div>
+		
+	</div>
+
+	<div class="span6">
+		<div class="field">
+			 <%= f.text_area :description, placeholder: "Décrivez votre cocktail...", rows: "10" %>
+		</div>
+
+	     <%= f.submit "Ajouter ce cocktail", class: "btn" %>
+
+	</div>
 <% end %>
+
+
+
+    <div class="span2">
+    	<%= f.text_field :dose, placeholder: "Quantité en cl" %>
+ 	</div>
+
+    <%= f.fields_for :ingredient do |quantity_ingredient| %>
+    	<div class="span4">
+	      	<%= quantity_ingredient.text_field :name, placeholder: "Nom de l'ingrédient"%>
+	    	<!--%= quantity_ingredient.collection_select :name, Ingredient.order(:name), :name, :name%-->
+	    </div>
+	    <%= link_to_remove_association "remove", f %>
+    <% end %>
+ 
+    
+
+
+
+	 		<!--div class="field">
+		 			 <%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name%>
+				 </div-->
+
+
+
+				 			<fieldset>
+				<div class="span6">	
+		 			 <%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name%>
+		 		</div>
+		 		<div class="span5">	
+					 <%= f.fields_for :quantities do |quant|%>
+					 	<%= quant.text_field :dose, placeholder: "Quantité en cl" %>
+					 <% end %>
+				</div>
+			</fieldset>
+
+
+
+						<fieldset>
+				<div class="span6">	
+		 			 <%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name%>
+		 		</div>
+		 		<div class="span5">	
+					 <%= f.fields_for :quantities do |quant|%>
+					 	<%= quant.text_field :dose, placeholder: "Quantité en cl" %>
+					 <% end %>
+				</div>
+			</fieldset>
+
+
+
+
+
+
+			 <%= f.fields_for :ingredient do |ingredient|%>
+					 	<%= ingredient.fields_for :measures do |measure|%>
+					 		<%= measure.text_field :number, placeholder: "Quantité en cl" %>
+					 		<% end%>
+					 <% end %>

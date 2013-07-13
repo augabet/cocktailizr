@@ -10,8 +10,10 @@
 #
 
 class Cocktail < ActiveRecord::Base
-  attr_accessible :description, :name, :ingredient_tokens
-  attr_reader :ingredient_tokens
+  attr_accessible :description, 
+                  :name, 
+                  :ingredient_ids,
+                  :quantities_attributes
 
   validates :name, presence: true
   validates :description, presence: true
@@ -19,11 +21,10 @@ class Cocktail < ActiveRecord::Base
 
   has_many :quantities
   has_many :ingredients, through: :quantities
-
   
-  def ingredient_tokens=(tokens)  
-      self.ingredient_ids = Ingredient.ids_from_tokens(tokens)
-  end
+  accepts_nested_attributes_for :quantities
+  accepts_nested_attributes_for :ingredients
+
 
   include PgSearch
 	pg_search_scope :search, against: [:name, :description],

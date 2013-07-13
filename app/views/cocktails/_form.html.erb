@@ -1,30 +1,33 @@
 <%= form_for(@cocktail) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-<div class="row-fluid">
-	<div class="span6">
+	<div class="row-fluid">
+		<div class="span6">
+			<fieldset id="cocktail-meta">
+			    <%= f.text_field :name , placeholder: "Nom du cocktail"%><br />   
+			</fieldset> 
 
-		<div class="field">
-				<%= f.text_field :name, placeholder: "Nom du cocktail..." %>
+
+
+			
+		
+	 		<!--%= f.collection_select :ingredient_ids, Ingredient.order(:name), :id, :name, { :prompt => 'Choisissez l\'ingrédient' }%-->
+		<div id="cocktail-ingredients">
+			<fieldset>
+				<%= f.fields_for :quantities do |quantity| %> 
+		       	 <%= render 'quantity_fields', f: quantity %> 
+		      	<% end %> 
+			</fieldset>
 		</div>
-
-
-		<div class="field">
-		  <%= f.label :ingredient_tokens, "Ingredients" %>
-		  <%= f.text_field :ingredient_tokens,  placeholder: "Ingrédients...", data: {load: @cocktail.ingredients}%>
-		</div><br />
-
-	</div>
-
-	<div class="span6">
-		<div class="field">
-			 <%= f.text_area :description, placeholder: "Décrivez votre cocktail...", rows: "10" %>
+			<%= link_to_add_association 'Ajouter un ingredient', f, :quantities,
+				    												'data-association-insertion-node' => "#cocktail-ingredients",
+				    												'data-association-insertion-method' => "append",
+				    												:wrap_object => Proc.new {|quantity| quantity.build_ingredient; quantity },
+				    												class: "btn"%> 
 		</div>
-
-	     <%= f.submit "Ajouter ce cocktail", class: "btn" %>
-
+		<div class="span6">
+			<%= f.text_area :description, placeholder: "Description du cocktail", rows: 7 %>
+			<%= f.submit "Ajouter ce cocktail", class: "btn" %>
+		</div>
 	</div>
 <% end %>
-
-
-

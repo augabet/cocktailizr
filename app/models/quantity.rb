@@ -11,7 +11,17 @@
 #
 
 class Quantity < ActiveRecord::Base
+  attr_accessible :dose, 
+                  :ingredient,
+                  :ingredient_attributes
   belongs_to :ingredient
   belongs_to :cocktail
 
+  accepts_nested_attributes_for :ingredient
+
+
+  def ingredient_attributes=(ingredient_attributes)
+		ingredient = Ingredient.find_or_create_by_name(ingredient_attributes[:name].downcase)
+		self.ingredient_id = ingredient.id
+  end
 end
