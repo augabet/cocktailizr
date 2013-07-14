@@ -2,8 +2,8 @@
    Bonjour, vous êtes connecté en tant que : <strong><%= current_user.email  %></strong><br />
    Ingrédients disponibles : 
 		<ul>
-		  <% current_user.collections.each do |collection| %>
-		    <li><%= collection.ingredient_id %></li>
+		  <% current_user.ingredients.each do |ingredient| %>
+		    <li><%= ingredient.name %></li>
 		  <% end %>
 		</ul>
 

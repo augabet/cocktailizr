@@ -28,6 +28,7 @@
                 <ul class="dropdown-menu">
                   <% if user_signed_in? %>
                     <li><%= link_to 'Profil'.html_safe, edit_user_registration_path %> </li>
+                    <li><%= link_to 'Ma collection'.html_safe %> </li>
                     <li><%= link_to "Déconnexion".html_safe, destroy_user_session_path, method: :delete %></li>
                   <% else %>
                     <li><%= link_to "Créer un compte".html_safe, new_user_registration_path %></li>
