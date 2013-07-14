@@ -1,0 +1,13 @@
+<%= form_for(current_user.collections.build) do |f| %>
+
+<div class="field">
+  <% Ingredient.all.each do |ingredient| %>
+    <%= check_box_tag "user[ingredient_ids][]", ingredient.id %>
+    <%= ingredient.name %><br/>
+  <% end %>
+</div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

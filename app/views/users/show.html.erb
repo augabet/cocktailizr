@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+   Bonjour, vous êtes connecté en tant que : <strong><%= current_user.email  %></strong><br />
+   Ingrédients disponibles : 
+		<ul>
+		  <% current_user.collections.each do |collection| %>
+		    <li><%= collection.ingredient_id %></li>
+		  <% end %>
+		</ul>
+
+   <br />
+   <br /><%= link_to "Ajouter un ingrédient à ma collection", edit_user_path, class: "btn" %>
+
+<% end %>

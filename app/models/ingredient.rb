@@ -13,6 +13,9 @@ class Ingredient < ActiveRecord::Base
 
   validates :name, presence: true,uniqueness: { case_sensitive: false }
   has_many :quantities
+  has_many :collections
   has_many :cocktails, through: :quantities
+  has_many :users, through: :collections
+
 
 end
