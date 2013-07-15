@@ -9,15 +9,19 @@
 
 		<form class="form-search">
 			<div class="input-append">
-		<%= form_tag cocktails_path,method: :get do %>
+			<%= form_tag cocktails_path,method: :get do %>
 
-		 
-		    <%= text_field_tag :query, params[:query], placeholder: "ex : vodka whisky ...", class:"search-query"%>
-		    <%= submit_tag "Rechercher", name: nil, class:"btn"%>
+			 
+			    <%= text_field_tag :query, params[:query], placeholder: "ex : vodka whisky ...", class:"search-query"%>
 
-		<% end %>
-			</div>
+			    <%= submit_tag "Rechercher", name: nil, class:"btn"%>
+
+			<% end %>
+
+		  </div>
 		</form>
+		<%= params[:query]%>
+
 		<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
 		                           class: "btn btn-large" %>
 	</div>

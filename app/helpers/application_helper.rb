@@ -23,6 +23,18 @@ module ApplicationHelper
     end
   end
 
-
-  
+  def mesure_ingredient_cocktail(query, cocktail)
+    if query != nil
+      tabquery = query.split(" ").map { |i| i.to_s} 
+      tabingredient = Array.new 
+      cocktail.ingredients.each do |ingredient|
+        tabingredient.push(ingredient.name) 
+      end
+      nombre_ingredient_cocktail = tabingredient.length
+      difference_inguser_vs_ingcocktail = tabingredient - tabquery
+      nombre_ingredient_difference = difference_inguser_vs_ingcocktail.length
+      nombre_ingredient_cocktail == nombre_ingredient_difference
+    end
+  end
+ 
 end

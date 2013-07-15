@@ -1,28 +1,6 @@
-<div class="center hero-unit">
-    <h1>Bienvenue sur Cocktailizr</h1>
 
-    <h2>
-      Cocktailizr vous permet de déterminer les cocktails réalisables en fonctions des ingrédients que vous avez, chez vous.
-    </h2>
-
-<br />
-	<% if user_signed_in? %>
-	   Bonjour, vous êtes connecté en tant que : <strong><%= current_user.email  %></strong><br />
-	   		<ul>
-			  <% current_user.ingredients.each do |ingredient| %>
-			    <li><%= ingredient.name %></li>
-			  <% end %>
-			</ul>
-			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
-	<% end %>
-<br /><br />
-
-	<%= form_tag cocktails_path, class:"form-search", method: :get do %>
-	<div class="input-append">
-		    <%= text_field_tag :query, params[:query], placeholder: "ex : vodka whisky ...", class:"span4 search-query" %>
-		    <%= submit_tag "Search", name: nil, class: "btn"%>
-	</div>
-
-	<% end %>
-
-</div>
+<% if user_signed_in? %>
+	<%= render 'user_page' %>
+<% else %>
+	<%= render 'anonymous_page' %>
+<% end %>

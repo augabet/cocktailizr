@@ -1,0 +1,59 @@
+<div class="page-header">
+  Bonjour, vous êtes connecté en tant que : <strong><%= current_user.email  %></strong><br />
+</div>
+
+<div class="row-fluid">
+	<div class="span4">
+		<strong>Mes ingrédients</strong><br /><br />
+	   		<ul>
+	   		  <% ingredient_user = String.new %>
+			  <% current_user.ingredients.each do |ingredient| %>
+			    <li><%= ingredient.name %></li>
+			   	 <% ingredient_user += ingredient.name + ' '  %>
+			  <% end %>
+			  <% params[:query] = ingredient_user %>
+
+			  <%= params[:query]%>
+			</ul>
+			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
+	</div>
+
+	<div class="span8">
+		<strong>Les cocktails que vous pouvez faire sont en vert. Il vous manque au moins un ingrédient pour les autres. </strong><br /><br />
+	
+		<ul class="thumbnails">
+			<% @cocktails.each do |cocktail|  %>
+					<% if !mesure_ingredient_cocktail(params[:query], cocktail) %>
+					<% resultat = perfect_match(params[:query], cocktail)%>
+						<li class="span4">    	 
+						<% if resultat.empty? %>
+							<div class="thumbnail specialthumb">
+							  <img src="/images/cock3.jpg" alt="" style="width:300px; height:200px;">
+						  <h3><%= cocktail.name %></h3>
+						 <% ingredient_thumb = Array.new %>     
+						  <%cocktail.ingredients.each do |ingredient| %>
+						  	<% ingredient_thumb.push(ingredient.name) %>
+						  <%end %>
+						  <p><%= ingredient_thumb.first%></p>
+						  <p>...</p>
+						  <p><%= link_to "Description", cocktail,class: "btn " %></p>
+						 </div>
+						<% else %>
+							  <div class="thumbnail">
+							  <img src="/images/cock4.jpg" alt="" style="width:300px; height:200px;">
+							<h3><%= cocktail.name %></h3>
+							<% ingredient_thumb = Array.new %> 
+							<%cocktail.ingredients.each do |ingredient| %>
+						  	<% ingredient_thumb.push(ingredient.name) %>
+						  	<%end %>
+						  		<p><%= ingredient_thumb.first%></p>
+						  		<p>Il manque <%= resultat.length %> ingrédients</p>
+						  	<p><%= link_to "Description", cocktail,class: "btn " %></p>
+						  </div>
+						<%end %>     
+						</li>
+					<% end%>
+			<%end %>
+		</ul>
+	</div>
+</div>
