@@ -1,13 +1,13 @@
-<%= form_for(@user) do |f| %>
 
-<div class="field">
-  <% Ingredient.all.each do |ingredient| %>
-    <%= check_box_tag "user[ingredient_ids][]", ingredient.id %>
-    <%= ingredient.name %><br/>
-  <% end %>
-</div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_for(@user) do |f| %>
+	<div class="field">
+	  <% Ingredient.all.each do |ingredient| %>
+	    <%= check_box_tag "user[ingredient_ids][]", ingredient.id, @user.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient) %>
+	    <%= label_tag dom_id(ingredient), ingredient.name %><br/>
+	  <% end %>
+	</div>
+	  
+	<div class="actions">
+	<%= f.submit %>
+	</div>
 <% end %>

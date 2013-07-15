@@ -6,7 +6,16 @@
     </h2>
 
 <br />
-<br />
+	<% if user_signed_in? %>
+	   Bonjour, vous êtes connecté en tant que : <strong><%= current_user.email  %></strong><br />
+	   		<ul>
+			  <% current_user.ingredients.each do |ingredient| %>
+			    <li><%= ingredient.name %></li>
+			  <% end %>
+			</ul>
+			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
+	<% end %>
+<br /><br />
 
 	<%= form_tag cocktails_path, class:"form-search", method: :get do %>
 	<div class="input-append">
