@@ -7,6 +7,12 @@
   <b>Nom: </b><%= i.name %> </br>
   <%end %>
   </br>
-  <%= link_to "Ajouter un nouvel ingrédient", new_ingredient_path,
+
+ <% if current_user.admin? %>
+
+  	<%= link_to "Ajouter un nouvel ingrédient", new_ingredient_path,
                            class: "btn" %>
+
+<% end %>
+
 </p>

@@ -1,5 +1,8 @@
 class CocktailsController < ApplicationController
- 
+    before_filter :authenticate_user!, only: [:create, :new]
+	before_filter :admin_authorization, only: [:create, :new]
+
+
 	def index
 		@cocktails = Cocktail.text_search(params[:query])
 	end
@@ -21,4 +24,11 @@ class CocktailsController < ApplicationController
 			render 'new'
 		end
 	end
+
+
+	private
+
+	def admin_authorization
+	 	redirect_to root_url unless current_user.admin?
+	end 
 end

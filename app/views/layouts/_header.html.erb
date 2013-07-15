@@ -13,7 +13,9 @@
         <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Cocktails", cocktails_path %></li>
-              <li><%= link_to "Ingrédients", ingredients_path %></li>
+
+               <!--li><%= link_to "Ingrédients", ingredients_path %></li-->
+
        
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -23,7 +25,6 @@
                 <ul class="dropdown-menu">
                   <% if user_signed_in? %>
                     <li><%= link_to 'Profil'.html_safe, edit_user_registration_path %> </li>
-                    <li><%= link_to 'Ma collection'.html_safe %> </li>
                     <li><%= link_to "Déconnexion".html_safe, destroy_user_session_path, method: :delete %></li>
                   <% else %>
                     <li><%= link_to "Se connecter".html_safe, new_user_session_path %></li>

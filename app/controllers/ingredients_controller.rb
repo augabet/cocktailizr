@@ -1,5 +1,9 @@
   class IngredientsController < ApplicationController
-  
+     before_filter :authenticate_user!, only: [:create]
+      before_filter do 
+        redirect_to root_url unless current_user.admin?
+      end
+
   def index
     @ingredients = Ingredient.order(:name)
 
