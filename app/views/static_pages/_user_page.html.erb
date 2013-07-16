@@ -5,21 +5,22 @@
 <div class="row-fluid">
 	<div class="span4">
 		<strong>Mes ingrédients</strong><br /><br />
+		<%if current_user.ingredients.count == 0 %> Ajoutez dans un premier temps vos ingrédients<% end %>
 	   		<ul>
+	   		
 	   		  <% ingredient_user = String.new %>
 			  <% current_user.ingredients.each do |ingredient| %>
 			    <li><%= ingredient.name %></li>
 			   	 <% ingredient_user += ingredient.name + ' '  %>
 			  <% end %>
 			  <% params[:query] = ingredient_user %>
-
-			  <%= params[:query]%>
 			</ul>
 			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
 	</div>
 
 	<div class="span8">
-				<strong>Les cocktails que vous pouvez faire sont en vert. Il vous manque au moins un ingrédient pour les autres. </strong><br /><br />
+		<%if current_user.ingredients.count != 0 %> <strong>Les cocktails que vous pouvez faire sont en vert. Il vous manque au moins un ingrédient pour les autres. </strong><br /><br /><% end %>
+				
 	
 		<ul class="thumbnails">
 			<% @cocktails.each do |cocktail|  %>

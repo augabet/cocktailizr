@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   	@user = User.find(current_user[:id])
 
+
   end
 
   def update
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id]) 
 
     if @user.update_attributes(params[:user])
-      redirect_to @user, notice: "Bien ajoute a la collection"
+      redirect_to root_path, notice: "Bien ajoute a la collection"
     else
       render :edit
     end

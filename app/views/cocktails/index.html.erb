@@ -21,11 +21,13 @@
 		  </div>
 		</form>
 		<%= params[:query]%>
-<% if current_user.admin? %>
+<% if user_signed_in? %>
+	<% if current_user.admin? %>
 
-		<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
-		                           class: "btn btn-large" %>
+			<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
+			                           class: "btn btn-large" %>
 
+	<% end %>
 <% end %>
 	</div>
 
