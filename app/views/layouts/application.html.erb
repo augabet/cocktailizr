@@ -12,19 +12,10 @@
   
   <body>
     <div class="container">
-      <%= render 'layouts/header'%>
-
-
-
-      <div class="row">
-        
+        <%= render 'layouts/header'%>
+        <%= render 'layouts/flash_messages'%>
         <%= yield %>
-        <% flash.each do |name, msg| %>
-           <%= content_tag :div, msg, id: "flash_#{name}" %>
-         <% end %>
         <%= debug(params) if Rails.env.development? %>
-      </div>
-      
     </div>
   </body>
 </html>
