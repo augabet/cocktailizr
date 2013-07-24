@@ -15,6 +15,7 @@
 			  <% end %>
 			  <% params[:query] = ingredient_user %>
 			</ul>
+			
 			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
 	</div>
 

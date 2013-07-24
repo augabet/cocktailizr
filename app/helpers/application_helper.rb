@@ -24,7 +24,7 @@ module ApplicationHelper
       tabquery = query.split(" ").map { |i| i.to_s} 
       tabingredient = Array.new 
       cocktail.ingredients.each do |ingredient|
-        tabingredient.push(ingredient.name) 
+        tabingredient = ingredient.name.split(" ")
       end 
       resultat =   tabingredient - tabquery
     else 
@@ -37,7 +37,7 @@ module ApplicationHelper
       tabquery = query.split(" ").map { |i| i.to_s} 
       tabingredient = Array.new 
       cocktail.ingredients.each do |ingredient|
-        tabingredient.push(ingredient.name) 
+         tabingredient = ingredient.name.split(" ")
       end
       nombre_ingredient_cocktail = tabingredient.length
       difference_inguser_vs_ingcocktail = tabingredient - tabquery

@@ -20,15 +20,10 @@
 
 		  </div>
 		</form>
-		<%= params[:query]%>
-<% if user_signed_in? %>
-	<% if current_user.admin? %>
-
-			<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
-			                           class: "btn btn-large" %>
-
-	<% end %>
-<% end %>
+		<% if user_signed_in? && current_user.admin? %>
+				<%= link_to "Ajouter un nouveau coktail", new_cocktail_path,
+					                           class: "btn btn-large" %>
+		<% end %>
 	</div>
 
 	<div class="span8">
