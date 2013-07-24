@@ -13,7 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require chosen-jquery
-//= require jquery.tokeninput
 //= require cocoon
 //= require_tree .
