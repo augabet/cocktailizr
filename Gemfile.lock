@@ -34,10 +34,6 @@ GEM
     bcrypt-ruby (3.1.1-x86-mingw32)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
-    chosen-rails (0.12.0)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
     cocoon (1.2.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -126,7 +122,6 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bootstrap-sass (= 2.1)
-  chosen-rails
   cocoon
   coffee-rails (= 3.2.2)
   devise
