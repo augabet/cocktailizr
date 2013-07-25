@@ -15,7 +15,7 @@
 			  <% end %>
 			  <% params[:query] = ingredient_user %>
 			</ul>
-			<%= params[:query] %>
+			
 			<%= link_to "Ajouter un ingrédient à ma collection", {:controller => "users", :action => "edit", :id => current_user} , class: "btn" %>
 	</div>
 
@@ -25,7 +25,7 @@
 	
 		<ul class="thumbnails">
 			<% @cocktails.each do |cocktail|  %>
-					<% if mesure_ingredient_cocktail(params[:query], cocktail) %>
+					<% if !mesure_ingredient_cocktail(params[:query], cocktail) %>
 					<% resultat = perfect_match(params[:query], cocktail)%>
 					
 						<li class="span4">    	 
@@ -38,7 +38,6 @@
 						  	<% ingredient_thumb.push(ingredient.name) %>
 						  <%end %>
 						  <p><%= ingredient_thumb.first%></p>
-						  <p>je suis dans le cas ou le résultat est vide</p>
 						  <p>...</p>
 						  <p><%= link_to "Description", cocktail,class: "btn " %></p>
 						 </div>
@@ -46,10 +45,11 @@
 							  <div class="thumbnail">
 							  <img src="/images/cock4.jpg" alt="" style="width:300px; height:200px;">
 							<h3><%= cocktail.name %></h3>
+							<%= mesure_ingredient_cocktail(params[:query], cocktail) %>
 							<% ingredient_thumb = Array.new %> 
 							<%cocktail.ingredients.each do |ingredient| %>
 						  	<% ingredient_thumb.push(ingredient.name) %>
-						  	<%= mesure_ingredient_cocktail(params[:query], cocktail) %>
+						  	
 						  	<%end %>
 						  		<p><%= ingredient_thumb.first%></p>
 						  		<p>Il manque <%= resultat.length %> ingrédients</p>
