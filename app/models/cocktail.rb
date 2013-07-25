@@ -27,20 +27,20 @@ class Cocktail < ActiveRecord::Base
 
 
   include PgSearch
-	pg_search_scope :search, against: [:name, :description],
+	pg_search_scope :search, against: [:name, :description], 
 	using: {tsearch: {:any_word => true}},
 	associated_against: {ingredients: :name}
     
 
   def self.text_search(query)
     if query.present?
+      dico=['jus','de','blanc']
+      query = query.split(" ") - dico
+      query.join(" ")
       search(query)
-      #rank = <<-RANK
-      #  ts_rank(to_tsvector(name), plainto_tsquery(#{sanitize(query)}))
-      #RANK
-     # where("to_tsvector('english', name) @@ :q or to_tsvector('english', description) @@ :q", q: query).order("#{rank} desc")
     else
       scoped
     end
   end
+
 end
