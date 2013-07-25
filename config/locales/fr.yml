@@ -226,3 +226,4 @@ fr:
         description: "La description"
     errors:
       <<: *errors
+
